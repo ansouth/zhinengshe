@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function (ev) {
+            var oSet = document.getElementById('set');
+            var aOpt = oSet.getElementsByTagName('option')[0];
+            for (var i=0;i<aOpt.length;i++){
+                aOpt[i].onmouseover=function (ev2){
+                    aOpt[i].style.background='orange';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<select name="" id="set">
+    <option value="">请选择</option>
+    <option value="">11</option>
+    <option value="">12</option>
+    <option value="">13</option>
+    <option value="">14</option>
+    <option value="">15</option>
+</select>
+</body>
+</html>

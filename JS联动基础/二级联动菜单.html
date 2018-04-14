@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二级联动菜单</title>
+</head>
+<body>
+   <select id="province" onchange="ld();">
+       <option value="-1">请选择</option>
+       <option value="0">北京</option>
+       <option value="1">贵阳</option>
+       <option value="2">江苏</option>
+   </select>
+   <select id="city" name="">
+
+   </select>
+</body>
+<script>
+    var  area = [
+            ['天安门','长城','北大校园','清华门'],
+            ['花溪大学城','小河','金阳','云岩','乌当','青岩','南明'],
+            ['扬州','苏州','南京','淮安','无锡']
+    ];
+    function ld() {
+        var sel = document.getElementById('province');
+//        alert(sel.value);//查找province下的value值，（把province下的地区造成一个数组）
+        var opt='';
+        if(sel.value=='-1'){
+            document.getElementById('city').innerHTML = opt;
+            return;
+        }
+       for( var i=0, len=area[sel.value].length; i<len; i++){
+            //每循环一次准备一个空字符串
+           opt =opt + '<option value="'+ i +'">' + area[sel.value][i] + '</option>';
+//           alert(opt);//打印option下的值，
+           //把option塞给city
+           document.getElementById('city').innerHTML = opt;
+       }
+    }
+</script>
+</html>

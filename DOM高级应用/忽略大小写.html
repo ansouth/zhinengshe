@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>忽略大小写</title>
+    <style>
+        table{
+            width: 400px;
+            height: 300px;
+        }
+        tr,td{
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oTab = document.getElementById('tab1');
+            var oTxt = document.getElementById('name');
+            var oBtn = document.getElementById('btn1');
+
+                oBtn.onclick=function () {
+                    for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+                        var sTab = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+                        var sTxt = oTxt.value;
+                        //忽略大小写搜索
+                        if(sTab.toLowerCase()==sTxt.toLowerCase()){
+                            oTab.tBodies[0].rows[i].style.background='yellow';
+                     }else {
+                            oTab.tBodies[0].rows[i].style.background='';
+                        }
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+姓名：<input type="text" id="name">
+<input type="submit" id="btn1" value="搜索">
+<table id="tab1">
+    <thead>
+    <td>ID</td>
+    <td>姓名</td>
+    <td>年龄</td>
+    <td>操作</td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>广大</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>yellow</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>张三</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>李四</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>广大</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>广大</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

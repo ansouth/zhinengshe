@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js透明度渐变</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+            background: #000;
+            filter: alpha(30);
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oDiv = document.getElementById('div1');
+            oDiv.onmouseover=function (ev2) {
+                starMove(100);
+            };
+            oDiv.onmouseout=function (ev2) {
+                starMove(30);
+            };
+        };
+            var alpha = 30;
+            var timer = null;
+            function starMove(iTarget) {
+                var oDiv = document.getElementById('div1');
+                 clearInterval(timer);
+                 timer  = setInterval(function () {
+                     var speed = 0;
+                     if (alpha<iTarget){
+                         speed=5;
+                     }else {
+                         speed=-5;
+                     }
+                      if(alpha == iTarget){
+                         clearInterval(timer);
+                      }else {
+                         alpha  += speed;
+                         oDiv.style.filter = 'alpha(opacity='+ alpha +')';//在IE浏览器下
+                          oDiv.style.opacity = alpha/100;
+                      }
+                 },30);
+            }
+    </script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+</body>
+</html>

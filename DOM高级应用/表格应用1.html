@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单的基础应用</title>
+    <style>
+        table{
+            width: 400px;
+            height: 300px;
+        }
+        tr,td{
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oTab = document.getElementById('tab1');
+            // alert(oTab.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[1].innerHTML);
+            alert(oTab.tBodies[0].rows[1].cells[2].innerHTML);
+
+        }
+    </script>
+</head>
+<body>
+  <table id="tab1">
+      <thead>
+          <td>ID</td>
+          <td>姓名</td>
+          <td>年龄</td>
+      </thead>
+      <tbody>
+      <tr>
+          <td>1</td>
+          <td>广大</td>
+          <td>23</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>张三</td>
+          <td>23</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>李四</td>
+          <td>23</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>广大</td>
+          <td>23</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>广大</td>
+          <td>23</td>
+      </tr>
+      </tbody>
+  </table>
+</body>
+</html>

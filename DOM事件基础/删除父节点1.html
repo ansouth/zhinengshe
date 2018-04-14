@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function (ev) {
+            var aA = document.getElementsByTagName('a');
+            var oUl = document.getElementById('uli');
+            for(var i=0;i<aA.length;i++){
+                aA[i].onclick=function () {
+                    oUl.removeChild(this.parentNode);
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<ul id="uli">
+    <li>gfsdg1<a href="javascript:;">删除</a></li>
+    <li>2bfsdb<a href="javascript:;">删除</a></li>
+    <li>n fsd 3<a href="javascript:;">删除</a></li>
+    <li>4 fds<a href="javascript:;">删除</a></li>
+    <li>5bfsdh<a href="javascript:;">删除</a></li>
+    <li>hterj6<a href="javascript:;">删除</a></li>
+    <li>mnyreh7<a href="javascript:;">删除</a></li>
+    <li>htre8<a href="javascript:;">删除</a></li>
+    <li>9hjrtej<a href="javascript:;">删除</a></li>
+</ul>
+</body>
+
+</html>

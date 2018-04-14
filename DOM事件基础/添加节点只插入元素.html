@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function (ev) {
+            var oBtn = document.getElementById('btn');
+            var oUl  = document.getElementById('uli');
+            var oTxt = document.getElementById('text1');
+            oBtn.onclick=function (ev2) {
+                var oLi = document.createElement('li');
+                var aLi = oUl.getElementsByTagName('li');
+                oLi.innerHTML=oTxt.value;
+                // oUl.appendChild(oLi);//把他插入到其父节点中去
+                 oUl.insertBefore(oLi,aLi[0]);
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="text1">
+<input type="submit" value="添加li" id="btn">
+<ul id="uli">
+
+</ul>
+</body>
+</html>
