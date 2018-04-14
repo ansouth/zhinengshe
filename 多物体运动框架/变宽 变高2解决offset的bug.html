@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            float: left;
+            margin: 10px;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+            /*//这里加border 测试有没有问题*/
+            border: 2px solid #000;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oDiv1 = document.getElementById('div1');
+            oDiv1.onmouseover =function (ev2) {
+                startMove(this,400);
+            };
+            oDiv1.onmouseout =function (ev2) {
+                startMove(this,200);
+            };
+/*
+            var oDiv2 = document.getElementById('div2');
+            oDiv2.onmouseover =function (ev2) {
+                startMove2(this,400);
+            };
+            oDiv2.onmouseout =function (ev2) {
+                startMove2(this,200);
+            }; */
+        };
+
+        function getStyle(obj,name) {
+            if(obj.currentStyle){
+                return obj.currentStyle[name];//重点记忆
+            }else {
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        function startMove(obj,iTarget) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                // var cur = parseInt(getStyle(obj,'height'));//为了减少麻烦把他转为一个变量
+                var speed = (iTarget - parseInt(getStyle(obj,'height'))) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (parseInt(getStyle(obj,'height')) == iTarget) {
+                    clearInterval(obj.timer);
+                } else {
+                    obj.style.height = parseInt(getStyle(obj,'height')) + speed + 'px';
+                }
+            }, 30);
+        }
+
+    </script>
+</head>
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+</body>
+</html>

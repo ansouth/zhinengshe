@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS缓冲运动1</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 56px;
+            background: #000000;
+            position: absolute;
+            left: 24px;
+            top: 0px;
+            opacity: 0.3;
+            filter: alpha(30);
+        }
+        #div2{
+            width: 1px;
+            height: 400px;
+            position: absolute;
+            left: 300px;
+            top: 0px;
+            background: #f8152b;
+        }
+        #div3{
+            width: 1px;
+            height: 400px;
+            position: absolute;
+            left: 100px;
+            top: 0px;
+            background: #f8152b;
+        }
+        input{
+            width: 130px;
+            height: 40px;
+
+        }
+    </style>
+    <script>
+
+        var timer = null;
+        function startMove(iTarget) {
+            var oDiv = document.getElementById('div1');
+
+            clearInterval(timer);
+            timer = setInterval(function () {
+            var speed = 0;
+
+            if(oDiv.offsetLeft<iTarget){
+                speed = 7;
+            }else {
+                speed = -7;
+            }
+            if(Math.abs(iTarget - oDiv.offsetLeft) <= 7){
+                clearInterval(timer);
+                oDiv.style.left = iTarget + 'px';
+            }else {
+                oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+            }
+            },30);
+
+        }
+    </script>
+</head>
+<body>
+<input type="submit" value="匀速运动到100" onmouseover="startMove(24)">
+<input type="submit" value="匀速运动到300" onmouseover="startMove(156)">
+<div id="div1"></div>
+</body>
+</html>

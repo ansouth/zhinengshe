@@ -9,8 +9,16 @@
             height: 100px;
             background: #000000;
             position: absolute;
-            left: 0px;
+            left: 700px;
             top: 50px;
+        }
+        #div2{
+            width: 1px;
+            height: 400px;
+            position: absolute;
+            left: 300px;
+            top: 0px;
+            background: #f8152b;
         }
     </style>
     <script>
@@ -21,6 +29,7 @@
             setInterval(function () {
                 //2.算出速度 ....目标距离减去当前位置
                 var speed = (300 - oDiv.offsetLeft)/5;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
                 oDiv.style.left = oDiv.offsetLeft + speed + 'px';
             },30);
         }
@@ -29,5 +38,6 @@
 <body>
 <input type="submit" value="开始运动" onclick="startMove()">
 <div id="div1"></div>
+<div id="div2"></div>
 </body>
 </html>

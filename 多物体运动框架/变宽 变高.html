@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            float: left;
+            margin: 10px;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+        }
+        #div2{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oDiv1 = document.getElementById('div1');
+            oDiv1.onmouseover =function (ev2) {
+                startMove(this,400);
+            };
+            oDiv1.onmouseout =function (ev2) {
+                startMove(this,200);
+            };
+
+            var oDiv2 = document.getElementById('div2');
+            oDiv2.onmouseover =function (ev2) {
+                startMove2(this,400);
+            };
+            oDiv2.onmouseout =function (ev2) {
+                startMove2(this,200);
+            };
+        };
+        function startMove(obj,iTarget) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var speed = (iTarget - obj.offsetHeight) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (obj.offsetHeight == iTarget) {
+                    clearInterval(obj.timer);
+                } else {
+                    obj.style.height = obj.offsetHeight + speed + 'px';
+                }
+            }, 30);
+        }
+            function startMove2(obj,iTarget) {
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function () {
+                    var speed = (iTarget - obj.offsetWidth)/6;
+                    speed = speed>0?Math.ceil(speed) : Math.floor(speed);
+                    if (obj.offsetWidth == iTarget){
+                        clearInterval(obj.timer);
+                    }else {
+                        obj.style.width = obj.offsetWidth + speed + 'px';
+                    }
+                },30);
+           }
+    </script>
+</head>
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+</body>
+</html>

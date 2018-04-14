@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            float: left;
+            margin: 10px;
+            font-size: 14px;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+            /*//这里加border 测试有没有问题*/
+            border: 2px solid #000;
+        }
+        #div2,#div3 ,#div4{
+            width: 200px;
+            height: 200px;
+            background: #f8152b;
+
+            border: 2px solid #000;
+
+        }
+    </style>
+    <script>
+        window.onload=function (ev) {
+            var oDiv1 = document.getElementById('div1');
+            oDiv1.onmouseover =function (ev2) {
+                startMove(this,'height',400);//div1希望变高就传一个height进去
+            };
+            oDiv1.onmouseout =function (ev2) {
+                startMove(this,'height',200);
+            };
+
+            var oDiv2 = document.getElementById('div2');
+            oDiv2.onmouseover =function (ev2) {
+                startMove(this,'width',400);//div2希望变高就传一个weight进去
+            };
+            oDiv2.onmouseout =function (ev2) {
+                startMove(this,'width',200);
+            };
+
+        var oDiv3 = document.getElementById('div3');
+        oDiv3.onmouseover =function (ev2) {
+            startMove(this,'fontSize',30);//div2希望变高就传一个weight进去
+        };
+        oDiv3.onmouseout =function (ev2) {
+            startMove(this,'fontSize',14);
+        };
+            var oDiv4 = document.getElementById('div4');
+            oDiv4.onmouseover =function (ev2) {
+                startMove(this,'borderWidth',30);//div2希望变高就传一个weight进去
+            };
+            oDiv4.onmouseout =function (ev2) {
+                startMove(this,'border',2);
+            };
+
+        };
+
+        function getStyle(obj,name) {
+            if(obj.currentStyle){
+                return obj.currentStyle[name];//重点记忆
+            }else {
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        function startMove(obj,attr,iTarget) {//要变宽在这添加一个参数
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var cur = parseInt(getStyle(obj,attr));//为了减少麻烦把他转为一个变量
+                var speed = (iTarget - parseInt(getStyle(obj,attr))) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (cur == iTarget) {
+                    clearInterval(obj.timer);
+                } else {
+                    // obj.style['height'] = parseInt(getStyle(obj,'height')) + speed + 'px';
+                    obj.style[attr] = cur + speed + 'px';
+                }
+            }, 30);
+        }
+
+    </script>
+</head>
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+<div id="div3">变个萨达刚发售表</div>
+<div id="div4"></div>
+//问题 怎么样让一个div的宽和高同事变化
+
+</body>
+</html>

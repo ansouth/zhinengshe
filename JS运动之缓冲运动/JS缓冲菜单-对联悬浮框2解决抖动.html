@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 150px;
+            height: 200px;
+            background: #000000;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+        }
+        body{
+            height: 3000px;
+        }
+    </style>
+    <script>
+        window.onscroll=function (x) {
+            var oDiv = document.getElementById('div1');
+            //最关键一步取scrollerTop
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //计算机的可视高度 减去 div的高度
+            //  oDiv.style.top = (document.documentElement.clientHeight - oDiv.offsetHeight)/2 + scrollTop + 'px';
+             startMove((parseInt(document.documentElement.clientHeight - oDiv.offsetHeight)/2 + scrollTop));
+        };
+          //写一个运动框架
+            var timer = null;
+            function startMove(iTarget) {//iTarget目标点
+                var oDiv = document.getElementById('div1');
+
+                clearInterval(timer);
+                timer =setInterval(function () {
+                    var speed = (iTarget - oDiv.offsetTop)/9;//计算他的速度
+                    speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                    if(oDiv.offsetTop == iTarget){
+                        clearInterval(timer);
+                    }else {
+                        document.getElementById('text1').value = oDiv.offsetTop;
+                        oDiv.style.top = oDiv.offsetTop + speed + 'px';
+                    }
+                },30);
+            }
+    </script>
+</head>
+<body>
+<input type="text" id="text1" style="position: fixed;right: 0px;top: 0px;">
+<div id="div1"></div>
+</body>
+</html>
