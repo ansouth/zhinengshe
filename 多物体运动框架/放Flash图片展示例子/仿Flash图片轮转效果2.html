@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片仓库</title>
+    <script src="js/move.js"></script>
+    <style>
+        body{background: #666;} ul{padding: 0; margin: 0;} li{list-style: none;}
+        img{border: 0;}
+        .play{width: 400px; height: 430px; margin: 50px auto 0; background: #999; font: 12px
+        Arial;}
+        .big_pic{width: 400px; height: 320px; overflow: hidden; border-bottom: 1px solid #ccc;
+            background: #222; position: relative; }
+        .big_pic li{width: 400px; height: 320px; overflow: hidden; position: absolute; top: 0;
+            left: 0; z-index: 0; background: url(img/loading.gif) no-repeat center center;}
+        .mark_left{width: 200px; height: 320px; position: absolute; left: 0; top: 0;
+            background: red; filter: alpha(opacity:0); opacity: 0; z-index: 3000;}
+        .mark_right{width: 200px; height: 320px; position: absolute; left: 200px; top: 0;
+            background: green; filter: alpha(opacity:0); opacity: 0; z-index: 3000;}
+        .big_pic .prev{width: 60px; height: 60px; background: url("images/left.png") no-repeat;
+            position: absolute; top: 130px; left: 10px; z-index: 3001; filter: alpha(opacity:0);
+            opacity: 0; cursor: pointer;}
+        .big_pic .next{width: 60px; height: 60px; background: url("images/left.png") no-repeat
+        0 -60px;position: absolute; top: 130px; right: 10px; z-index: 3001;
+            filter: alpha(opacity:0);opacity: 0;}
+        .big_pic .text{position: absolute; left: 10px; top: 302px; z-index: 3000; color: #CCC;}
+        .big_pic .length{position: absolute; right: 10px; bottom: 4px; z-index: 3000;
+            color: #CCC;}
+        .big_pic .bg{width: 400px; height: 25px; background: #000; alpha(opacity:60);
+            opacity: 0.6; position: absolute; z-index: 2999; bottom: 0; left: 0;}
+        .small_pic{width: 380px; height: 94px; position: relative; top: 7px; left: 10px;
+            overflow: hidden;}
+        .small_pic ul{height: 94px; position: absolute;top: 0;left: 0;}
+        .small_pic li{width: 120px; height: 94px; float: left; padding-right: 10px; background:
+                url(img/loading.gif) no-repeat center center; cursor: pointer;filter: alpha(opacity:60);
+            opacity: 0.6;}
+        .small_pic img{width: 120px; height: 94px;}
+    </style>
+</head>
+<body>
+<div id="playimages" class="play">
+    <ul class="big_pic">
+        <div class="prev"></div>
+        <div class="next"></div>
+
+        <div class="text">加载图片说明......</div>
+        <div class="length">计算图片数量......</div>
+
+        <a class="mark_left" href="#"></a>
+        <a class="mark_right" href="#"></a>
+        <div class="bg"></div>
+
+        <li style="z-index: 1;"><img src="images/1.jpg"></li>
+        <li><img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
+        <li><img src="images/4.jpg"></li>
+        <li><img src="images/5.jpg"></li>
+        <li><img src="images/6.jpg"></li>
+    </ul>
+    <div class="small_pic">
+        <ul style="width: 390px;">
+            <li style="filter: alpha(100); opacity: 1;"><img src="images/1.jpg"></li>
+            <li><img src="images/2.jpg"></li>
+            <li><img src="images/3.jpg"></li>
+            <li><img src="images/4.jpg"></li>
+            <li><img src="images/5.jpg"></li>
+            <li><img src="images/6.jpg"></li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+   function getByClass(oParent,sClass) {
+       var aEle = oParent.getElementsByTagName('*');
+       var aResult = [];
+       for(var i=0;i<aEle.length;i++){
+           if(aEle[i].className ==sClass){
+               aResult.push(aEle[i]);
+           }
+       }
+       return aResult;
+   }
+   window.onload=function (ev) {
+       var oDiv = document.getElementById('playimages');
+       var oBtnPrev = getByClass(oDiv,'prev')[0];
+       var oBtnNext = getByClass(oDiv,'next')[0];
+       var oMarkLeft = getByClass(oDiv,'mark_left')[0];
+       var oMarkRight = getByClass(oDiv,'mark_right')[0];
+
+        // oMarkLeft.onmouseover(function () {
+        //     startMove(oBtnPrev,'opacity',100);
+        // },30);
+       oMarkLeft.onmouseover = function () {
+           startMove(oBtnPrev,'opacity',100);
+       }
+   }
+</script>
+</html>

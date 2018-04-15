@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片仓库</title>
+    <script src="js/move.js"></script>
+    <style>
+        body{background: #666;} ul{padding: 0; margin: 0;} li{list-style: none;}
+        img{border: 0;}
+        .play{width: 400px; height: 430px; margin: 50px auto 0; background: #999; font: 12px
+        Arial;}
+        .big_pic{width: 400px; height: 320px; overflow: hidden; border-bottom: 1px solid #ccc;
+            background: #222; position: relative; }
+        .big_pic li{width: 400px; height: 320px; overflow: hidden; position: absolute; top: 0;
+            left: 0; z-index: 0; background: url(img/loading.gif) no-repeat center center;}
+        .mark_left{width: 200px; height: 320px; position: absolute; left: 0; top: 0;
+            background: red; filter: alpha(opacity:0); opacity: 0; z-index: 3000;}
+        .mark_right{width: 200px; height: 320px; position: absolute; left: 200px; top: 0;
+            background: green; filter: alpha(opacity:0); opacity: 0; z-index: 3000;}
+        .big_pic .prev{width: 60px; height: 60px; background: url(images/left.png) no-repeat;
+            position: absolute; top: 130px; left: 10px; z-index: 3001; filter: alpha(opacity:0);
+            opacity: 0; cursor: pointer;}
+        .big_pic .next{width: 60px; height: 60px; background: url(images/right.png) no-repeat
+        0 -60px;position: absolute; top: 130px; right: 10px; z-index: 3001;
+            filter: alpha(opacity:0);opacity: 0;}
+        .big_pic .text{position: absolute; left: 10px; top: 302px; z-index: 3000; color: #CCC;}
+        .big_pic .length{position: absolute; right: 10px; bottom: 4px; z-index: 3000;
+            color: #CCC;}
+        .big_pic .bg{width: 400px; height: 25px; background: #000; alpha(opacity:60);
+            opacity: 0.6; position: absolute; z-index: 2999; bottom: 0; left: 0;}
+        .small_pic{width: 380px; height: 94px; position: relative; top: 7px; left: 10px;
+            overflow: hidden;}
+        .small_pic ul{height: 94px; position: absolute;top: 0;left: 0;}
+        .small_pic li{width: 120px; height: 94px; float: left; padding-right: 10px; background:
+                url(img/loading.gif) no-repeat center center; cursor: pointer;filter: alpha(opacity:60);
+            opacity: 0.6;}
+        .small_pic img{width: 120px; height: 94px;}
+    </style>
+</head>
+<body>
+<div id="playimages" class="play">
+    <ul class="big_pic">
+        <div class="prev"></div>
+        <div class="next"></div>
+
+        <div class="text">加载图片说明......</div>
+        <div class="length">计算图片数量......</div>
+
+        <a class="mark_left" href="#"></a>
+        <a class="mark_right" href="#"></a>
+        <div class="bg"></div>
+
+        <li style="z-index: 1;"><img src="images/1.jpg"></li>
+        <li><img src="images/2.jpg"></li>
+        <li><img src="images/3.jpg"></li>
+        <li><img src="images/4.jpg"></li>
+        <li><img src="images/5.jpg"></li>
+        <li><img src="images/6.jpg"></li>
+    </ul>
+    <div class="small_pic">
+        <ul style="width: 390px;">
+            <li style="filter: alpha(100); opacity: 1;"><img src="images/1.jpg"></li>
+            <li><img src="images/2.jpg"></li>
+            <li><img src="images/3.jpg"></li>
+            <li><img src="images/4.jpg"></li>
+            <li><img src="images/5.jpg"></li>
+            <li><img src="images/6.jpg"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    function getByClass(oParent,sClass) {
+        var aEle = oParent.getElementsByTagName('*');
+        var aResult = [];
+        for(var i=0;i<aEle.length;i++){
+            if(aEle[i].className ==sClass){
+                aResult.push(aEle[i]);
+            }
+        }
+        return aResult;
+    }
+    var oDiv=document.getElementById('playimages');
+    var oBtnPrev=getByClass(oDiv,'prev')[0];
+    var oBtnNext=getByClass(oDiv,'next')[0];
+    var oMarkLeft=getByClass(oDiv,'mark_left')[0];
+    var oMarkRight=getByClass(oDiv,'mark_right')[0];
+
+    var oDivSmall=getByClass(oDiv,'small_pic')[0];
+    var oUlSmall=oDivSmall.getElementsByTagName('ul')[0];
+    var aLiSmall=oDivSmall.getElementsByTagName('li');
+
+    var oUlBig=getByClass(oDiv,'big_pic')[0];
+    var aLiBig=oUlBig.getElementsByTagName('li');
+
+    var nowZIndex=2;
+    var now=0;
+
+    oUlSmall.style.width=aLiSmall.length*aLiSmall[0].offsetWidth+'px';
+    function tab()
+    {
+        aLiBig[now].style.zIndex=nowZIndex++;
+        for(var i=0;i<aLiSmall.length;i++)
+        {
+            move(aLiSmall[i],60,'opacity');
+        }
+        move(aLiSmall[now],100,'opacity');
+
+        aLiBig[now].style.height=0;
+        move(aLiBig[now],320,'height');
+        if(now==0)
+        {move(oUlSmall,0,'left');}
+        else if(now==aLiSmall.length-1)
+        {move(oUlSmall,-(now-2)*aLiSmall[0].offsetWidth,'left');}
+        else
+        {move(oUlSmall,-(now-1)*aLiSmall[0].offsetWidth,'left');}
+    }
+
+    for(var i=0;i<aLiSmall.length;i++)
+    {
+        aLiSmall[i].index=i;
+        aLiSmall[i].onclick=function()
+        {
+            if(this.index==now)return;
+            now=this.index;
+            tab();
+        };
+        aLiSmall[i].onmouseover=function()
+        {
+            move(this,100,'opacity');
+        };
+        aLiSmall[i].onmouseout=function()
+        {
+            if(this.index!=now)
+                move(this,60,'opacity');
+        };
+        oBtnPrev.onclick=function()
+        {
+            now--;
+            if(now==-1)
+            {now=aLiSmall.length-1;}
+            tab();
+        }
+        oBtnNext.onclick=function()
+        {
+            now++;
+            if(now==aLiSmall.length)
+            {now=0;}
+            tab();
+        };
+    }
+    var timer=setInterval(oBtnNext.onclick,2000);
+    oDiv.onmouseover=function()
+    {
+        clearInterval(timer);
+    }
+    oDiv.onmouseout=function()
+    {
+        timer=setInterval(oBtnNext.onclick,2000);
+    }
+
+    oBtnPrev.onmouseover=oMarkLeft.onmouseover=function()
+    {
+        move(oBtnPrev,100,'opacity');
+    }
+    oBtnPrev.onmouseout=oMarkLeft.onmouseout=function()
+    {
+        move(oBtnPrev,0,'opacity');
+    }
+    oBtnNext.onmouseover=oMarkRight.onmouseover=function()
+    {
+        move(oBtnNext,100,'opacity');
+    }
+    oBtnNext.onmouseout=oMarkRight.onmouseout=function()
+    {
+        move(oBtnNext,0,'opacity');
+    }
+
+    function getByClass(oParent,sClass)
+    {
+        var aResult=[];
+        var aEle=oParent.getElementsByTagName('*');
+        for(var i=0;i<aEle.length;i++)
+        {
+            if(aEle[i].className==sClass)
+            {
+                aResult.push(aEle[i]);
+            }
+        }
+        return aResult;
+    }
+</script>
+</body>
+</html>
