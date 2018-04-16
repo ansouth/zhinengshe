@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标拖动</title>
+    <style>
+        div{
+            font-size: 20px;
+            color: red;
+            background: #1e6694;
+            position: absolute;
+        }
+    </style>
+    <script>
+        function getPos(ev) {
+            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+            var scrollLeft = document.documentElement.scrollLeft||document.body.scrollLeft;
+
+            return{x:ev.clientX + scrollLeft,y:ev.clientY + scrollTop};//以Jsion形式返回
+
+        }
+        document.onmousemove=function (ev) {
+            var oDiv = document.getElementsByTagName('div');
+            var oEvent = ev||event;
+
+            var pos = getPos(oEvent);
+            for(var i=oDiv.length-1;i>0;i--){
+                 oDiv[i].style.left = oDiv[i-1].offsetLeft + 'px';
+                 oDiv[i].style.top = oDiv[i-1].offsetTop + 'px';
+            }
+
+            oDiv[0].style.left = pos.x + 'px';
+            oDiv[0].style.top = pos.y + 'px';
+        }
+    </script>
+</head>
+<body>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+<div>2</div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单冒泡事件</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #c0c0c0;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var oBtn = document.getElementById('btn');
+            var oDiv = document.getElementById('div1');
+            oBtn.onclick=function(ev){
+
+                if(oDiv.style.display == 'none'){
+                    oDiv.style.display = 'block';
+                }else {
+                    oDiv.style.display = 'none';
+                }
+                var oEvent = ev||event;
+                oEvent.cancelBubble = true;
+            };
+            document.onclick=function () {
+                oDiv.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="submit" value="取消冒泡" id="btn">
+<div id="div1">
+
+</div>
+</body>
+</html>

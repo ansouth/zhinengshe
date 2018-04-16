@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标拖动</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: #060894;
+            position: absolute;
+        }
+    </style>
+
+</head>
+<body style="height: 2000px;">
+<div id="div1"></div>
+</body>
+<script>
+    function getPos(ev) {
+        var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft||document.body.scrollLeft;
+
+        return{x:ev.clientX + scrollLeft,y:ev.clientY + scrollTop};//以Jsion形式返回
+
+    }
+    document.onmousemove=function (ev) {
+        var oEvent = ev||event;
+        var oDiv = document.getElementById('div1');
+         //用的时候调用一下函数
+        var pos = getPos(oEvent);
+
+        oDiv.style.left = pos.x + 'px';
+        oDiv.style.top = pos.y + 'px';
+    }
+</script>
+</html>

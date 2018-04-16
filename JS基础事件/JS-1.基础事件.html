@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event事件兼容问题</title>
+</head>
+<body>
+
+</body>
+<script>
+    window.onload=function () {
+        document.onclick=function (ev) {
+//            alert(event.clientX +',' + event.clientY);//IE
+//            alert(ev.clientX + ',' + ev.clientY);//FF
+            //解决兼容
+            var oEvent = ev||event;
+            alert(oEvent.clientX + ',' + oEvent.clientY);
+        }
+    }
+</script>
+</html>

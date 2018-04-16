@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件onkeydown</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: #c0c0c0;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+<script>
+    document.onkeydown = function (ev) {
+        var oEvent = ev||event;
+//        alert(oEvent.keyCode);
+        var oDiv = document.getElementById('div1');
+
+        if(oEvent.keyCode==37){
+           oDiv.style.left = oDiv.offsetLeft - 10 + 'px';
+        }else if(oEvent.keyCode==39){
+            oDiv.style.left = oDiv.offsetLeft + 10 + 'px';
+        }
+
+
+    }
+</script>
+</html>
